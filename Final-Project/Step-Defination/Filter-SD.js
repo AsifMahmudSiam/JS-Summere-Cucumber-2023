@@ -1,6 +1,7 @@
 const { When, Then } = require("@wdio/cucumber-framework");
 const landingPage = require("../Pages/LandingPage");
 const searchResult = require("../Pages/SearchResult");
+const { assert } = require("chai");
 
 
 const filter = new landingPage();
@@ -53,9 +54,15 @@ When (/I select Price Low to High from sort by dropdown$/,async function()
 })
 
 
-Then('I verify all hotels are listed in increasing order price', async function () {
+Then(/I verify all (.+) Starts hotels are displayed$/, async function (expectedHotelStar) {
+
+    await searchResultPage.verifyHotelsStars(expectedHotelStar);
+  });
+
+
+Then(/I verify all hotels are listed in increasing order price$/, async function () {
     const lowtoHighprice = await searchResultPage.getLowToHighPrices()
-    const sortedPrices = [...prices].sort((a, b) => a - b);
+    const sortedPrices = [...lowtoHighprice].sort((a, b) => a - b);
   
     assert.deepEqual(lowtoHighprice, sortedPrices, 'Hotel prices are not in Low to High');
   });

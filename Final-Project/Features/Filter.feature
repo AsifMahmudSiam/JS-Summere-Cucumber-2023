@@ -12,5 +12,6 @@ Feature: Filter
     And I click on Search Button
     And I click On 5 Star rating
     And I select Price Low to High from sort by dropdown
-    #Then I verify all hotels are listed in increasing order price
+    Then I verify all 5.0 Starts hotels are displayed
+    Then I verify all hotels are listed in increasing order price
     

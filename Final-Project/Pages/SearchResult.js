@@ -28,6 +28,31 @@ class searchResult{
         await browser.pause(5000);
     }
 
+
+    hotesStarsLocartorStarts = '//span[text()= "'
+    
+    hotesStarsLocartorEnds ='out of 5"]';
+    hotelAllStarLocator = '//a[@data-stid="open-hotel-information"]';
+
+    async verifyHotelsStars(expectedStar)
+    {
+      const hotelAllStarElements = await $$(this.hotelAllStarLocator);
+
+      for (const hotelAllStarElement of hotelAllStarElements)
+      {
+        const hoteForStarElement = `${this.hotesStarsLocartorStarts}${expectedStar}${this.hotesStarsLocartorEnds}`;
+        const hotelStarsElemnt = await hotelAllStarElement.$(hoteForStarElement);
+        
+        if(!hotelStarsElemnt||!(await hotelStarsElemnt.isDisplayed()))
+        {
+          return false;
+        }
+        
+      }
+      return true;
+
+
+    }
     
     //price locsator 
     lowtoHighpriceLocator = '//div[contains(text(), "The price is")]';
@@ -45,6 +70,8 @@ class searchResult{
 
     return prices;
   }
+
+
 
 
 
