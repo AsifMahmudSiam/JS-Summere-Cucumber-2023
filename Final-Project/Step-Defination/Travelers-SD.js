@@ -9,6 +9,11 @@ When (/^I change (.+) count to (.+)$/, async function(field, count)
 {
     switch (field) {
 
+        case 'adults':
+            await travelers.selectAdult(count);
+            
+            break;
+        
         case 'children':
             await travelers.selectChildren(count);
     
@@ -34,6 +39,14 @@ Then(/^I verify Children age dropdown are (.+)$/,async function(age){
     }
 
 })
+
+
+When (/^I select child-(.+) age as (.+)$/,async function(childNumber , childAge){
+    await travelers.childAgeSelect(childNumber,childAge);
+
+})
+
+
 
 
 
@@ -78,4 +91,10 @@ Then(/^I verify Children age dropdown is NOT displayed$/,async function(){
     const noDropdownDiplayed = await travelers.NoChildDropdown();
     expect(!noDropdownDiplayed,'There is child age dropdown').to.be.true;
 
+})
+
+
+Then (/^I verify the travelers count is updated correctly$/,async function(){
+    const totalCount = await travelers.totalTravelersDisplay()
+    expect(totalCount,'Total count is not diaplayed').to.be.true;
 })

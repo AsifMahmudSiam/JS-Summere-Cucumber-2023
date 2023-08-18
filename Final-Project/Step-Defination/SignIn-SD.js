@@ -4,6 +4,8 @@ const { expect } = require("chai");
 const support = require("../Pages/Support");
 const feedback = require("../Pages/Feedback");
 const property = require("../Pages/Property");
+const signIn = require("../Pages/SignIn");
+
 
 
 
@@ -12,6 +14,8 @@ const hotelLandingPage = new landingPage();
 const supportPage = new support();
 const feedbackPage = new feedback();
 const pageProperty = new property();
+const signInPage = new signIn();
+
 
 
 
@@ -99,10 +103,42 @@ When(/^I click on (.+) button$/, async function(button){
         case 'Next':
             await pageProperty.clickPropertyNextButton();
             break;
-    
+
+        case 'Get The APP':
+            await hotelLandingPage.clickGetTheApp();
+            break;
+            
+        case 'Done':
+            await hotelLandingPage.clickDoneButton();
+            break;
+
+        //case 'Sreach':
+            //await hotelLandingPage.clickSearchButton();
+            //break;
+
+        case 'Dates':
+            await hotelLandingPage.clcikCalendarDatesButton();
+            break;
+        
+        case 'One Key Rewards Terms & Conditions':
+            await signInPage.clickOneKeyReward();
+            break;
+
+        case 'Privacy Statement':
+            await signInPage.clickPrivacyStatement();
+            break;
+
+        case 'Calendar Done':
+            await hotelLandingPage.clickCalendarDoneButton();
+            break;
+
+
+
 
 
             
+
+        
 
             
 
@@ -127,3 +163,8 @@ When(/^I enter (.+) email address$/, async function(emailAdress){
      expect(errorDisplayed,'Sign In error message not displayed').to.be.true;
  
  })
+
+
+ 
+ 
+ 
